@@ -393,7 +393,7 @@ on `(hostname || uname -n) 2>/dev/null | sed 1q`
 "
 
 # Files that config.status was made for.
-config_files=" Makefile orte/Makefile orte/mca/Makefile orte/mca/odls/Makefile orte/mca/plm/Makefile orte/mca/ras/Makefile orte/mca/state/Makefile orte/mca/odls/yarn/Makefile orte/mca/plm/yarn/Makefile orte/mca/ras/yarn/Makefile orte/mca/state/yarn/Makefile orte/mca/hdclient/Makefile"
+config_files=" Makefile orte/Makefile orte/mca/Makefile orte/mca/odls/Makefile orte/mca/plm/Makefile orte/mca/ras/Makefile orte/mca/state/Makefile orte/mca/odls/yarn/Makefile orte/mca/plm/yarn/Makefile orte/mca/ras/yarn/Makefile orte/mca/state/yarn/Makefile"
 config_headers=" config.h"
 config_commands=" depfiles libtool"
 
@@ -755,7 +755,6 @@ do
     "orte/mca/plm/yarn/Makefile") CONFIG_FILES="$CONFIG_FILES orte/mca/plm/yarn/Makefile" ;;
     "orte/mca/ras/yarn/Makefile") CONFIG_FILES="$CONFIG_FILES orte/mca/ras/yarn/Makefile" ;;
     "orte/mca/state/yarn/Makefile") CONFIG_FILES="$CONFIG_FILES orte/mca/state/yarn/Makefile" ;;
-    "orte/mca/hdclient/Makefile") CONFIG_FILES="$CONFIG_FILES orte/mca/hdclient/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

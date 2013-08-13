@@ -49,6 +49,5 @@ AC_CONFIG_FILES([Makefile
                	orte/mca/plm/yarn/Makefile
                	orte/mca/ras/yarn/Makefile
                	orte/mca/state/yarn/Makefile
-               	orte/mca/hdclient/Makefile
                  ])
 AC_OUTPUT

@@ -6,7 +6,9 @@ sources = \
         odls_yarn_component.c \
         odls_yarn_module.c
 
-lib_LTLIBRARIES = mca_odls_yarn.la
+mcacomponentdir = $(libdir)/openmpi
+mcacomponent_LTLIBRARIES = mca_odls_yarn.la
+#lib_LTLIBRARIES = mca_odls_yarn.la
 mca_odls_yarn_la_SOURCES = $(sources) 
 mca_odls_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal
 mca_odls_yarn_la_LDFLAGS = -module -avoid-version 

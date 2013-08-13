@@ -92,8 +92,8 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(libdir)"
-LTLIBRARIES = $(lib_LTLIBRARIES)
+am__installdirs = "$(DESTDIR)$(mcacomponentdir)"
+LTLIBRARIES = $(mcacomponent_LTLIBRARIES)
 mca_state_yarn_la_DEPENDENCIES =
 am__objects_1 = state_yarn_component.lo state_yarn.lo
 am_mca_state_yarn_la_OBJECTS = $(am__objects_1)
@@ -244,7 +244,9 @@ sources = \
         state_yarn_component.c \
         state_yarn.c
 
-lib_LTLIBRARIES = mca_state_yarn.la
+mcacomponentdir = $(libdir)/openmpi
+mcacomponent_LTLIBRARIES = mca_state_yarn.la
+#lib_LTLIBRARIES = mca_state_yarn.la
 mca_state_yarn_la_SOURCES = $(sources) 
 mca_state_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal
 mca_state_yarn_la_LDFLAGS = -module -avoid-version 
@@ -282,33 +284,33 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
-install-libLTLIBRARIES: $(lib_LTLIBRARIES)
+install-mcacomponentLTLIBRARIES: $(mcacomponent_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
-	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
+	@list='$(mcacomponent_LTLIBRARIES)'; test -n "$(mcacomponentdir)" || list=; \
 	list2=; for p in $$list; do \
 	  if test -f $$p; then \
 	    list2="$$list2 $$p"; \
 	  else :; fi; \
 	done; \
 	test -z "$$list2" || { \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(libdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(libdir)" || exit 1; \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(libdir)'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(libdir)"; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(mcacomponentdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(mcacomponentdir)" || exit 1; \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(mcacomponentdir)'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(mcacomponentdir)"; \
 	}
 
-uninstall-libLTLIBRARIES:
+uninstall-mcacomponentLTLIBRARIES:
 	@$(NORMAL_UNINSTALL)
-	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
+	@list='$(mcacomponent_LTLIBRARIES)'; test -n "$(mcacomponentdir)" || list=; \
 	for p in $$list; do \
 	  $(am__strip_dir) \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(libdir)/$$f'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(libdir)/$$f"; \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(mcacomponentdir)/$$f'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(mcacomponentdir)/$$f"; \
 	done
 
-clean-libLTLIBRARIES:
-	-test -z "$(lib_LTLIBRARIES)" || rm -f $(lib_LTLIBRARIES)
-	@list='$(lib_LTLIBRARIES)'; \
+clean-mcacomponentLTLIBRARIES:
+	-test -z "$(mcacomponent_LTLIBRARIES)" || rm -f $(mcacomponent_LTLIBRARIES)
+	@list='$(mcacomponent_LTLIBRARIES)'; \
 	locs=`for p in $$list; do echo $$p; done | \
 	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
 	      sort -u`; \
@@ -317,7 +319,7 @@ clean-libLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 mca_state_yarn.la: $(mca_state_yarn_la_OBJECTS) $(mca_state_yarn_la_DEPENDENCIES) $(EXTRA_mca_state_yarn_la_DEPENDENCIES) 
-	$(mca_state_yarn_la_LINK) -rpath $(libdir) $(mca_state_yarn_la_OBJECTS) $(mca_state_yarn_la_LIBADD) $(LIBS)
+	$(mca_state_yarn_la_LINK) -rpath $(mcacomponentdir) $(mca_state_yarn_la_OBJECTS) $(mca_state_yarn_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -455,7 +457,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(LTLIBRARIES)
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)"; do \
+	for dir in "$(DESTDIR)$(mcacomponentdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -490,7 +492,7 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
+clean-am: clean-generic clean-libtool clean-mcacomponentLTLIBRARIES \
 	mostlyclean-am
 
 distclean: distclean-am
@@ -511,13 +513,13 @@ info: info-am
 
 info-am:
 
-install-data-am:
+install-data-am: install-mcacomponentLTLIBRARIES
 
 install-dvi: install-dvi-am
 
 install-dvi-am:
 
-install-exec-am: install-libLTLIBRARIES
+install-exec-am:
 
 install-html: install-html-am
 
@@ -557,23 +559,24 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-libLTLIBRARIES
+uninstall-am: uninstall-mcacomponentLTLIBRARIES
 
 .MAKE: install-am install-strip
 
 .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
-	clean-libLTLIBRARIES clean-libtool cscopelist ctags distclean \
-	distclean-compile distclean-generic distclean-libtool \
-	distclean-tags distdir dvi dvi-am html html-am info info-am \
-	install install-am install-data install-data-am install-dvi \
-	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-info install-info-am \
-	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags uninstall uninstall-am uninstall-libLTLIBRARIES
+	clean-libtool clean-mcacomponentLTLIBRARIES cscopelist ctags \
+	distclean distclean-compile distclean-generic \
+	distclean-libtool distclean-tags distdir dvi dvi-am html \
+	html-am info info-am install install-am install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-mcacomponentLTLIBRARIES \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags uninstall uninstall-am \
+	uninstall-mcacomponentLTLIBRARIES
 
 
 #lib_LTLIBRARIES = libmca_state_yarn.la

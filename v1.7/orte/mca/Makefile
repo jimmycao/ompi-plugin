@@ -226,7 +226,8 @@ top_builddir = ../..
 top_srcdir = ../..
 
 #SUBDIRS = odls
-SUBDIRS = hdclient odls plm ras state
+#SUBDIRS = hdclient odls plm ras state
+SUBDIRS = odls plm ras state
 all: all-recursive
 
 .SUFFIXES:
