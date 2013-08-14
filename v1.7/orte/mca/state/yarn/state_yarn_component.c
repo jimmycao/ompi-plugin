@@ -59,7 +59,7 @@ orte_state_base_component_t mca_state_yarn_component =
 
 static int state_yarn_open(void)
 {
-    return ORTE_SUCCESS;
+	return ORTE_SUCCESS;
 }
 
 static int state_yarn_close(void)

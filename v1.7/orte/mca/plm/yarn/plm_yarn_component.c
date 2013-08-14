@@ -34,6 +34,11 @@
 #include "orte/mca/plm/base/plm_private.h"
 #include "plm_yarn.h"
 
+//#include "opal/util/lt_interface.h"
+//#include "opal/libltdl/ltdl.h"
+//#include "/Users/caoj7/program/common-c/include/libltdl/lt_system.h"
+//#include "/Users/caoj7/program/common-c/include/ltdl.h"
+
 
 /*
  * Public string showing the plm ompi_yarn component version number
@@ -85,8 +90,92 @@ orte_plm_yarn_component_t mca_plm_yarn_component = {
        here; will be initialized in plm_yarn_open() */
 };
 
+
+//static int ltdl_pbc()
+//{
+//
+//	int rc;
+//	char filename[1024];
+//	filename[0] = '\0';
+////    opal_lt_dladvise advise;
+//	lt_dladvise advise;
+//
+//
+//	opal_output(0, "ltdl_pbc !!!!!!!!!!!!!!!");
+////    if (!getenv("OPENMPI_HOME")) {
+////        opal_output(0, "plm:yarn:ltdl_pbc: OPENMPI_HOME not set in env, please check.\n");
+////        return -1;
+////    }
+//
+//    char* search_path = malloc(1024);
+////    strcpy(search_path, getenv("OPENMPI_HOME"));
+//    strcpy(search_path, "/Users/caoj7/program/orte");
+//    strcat(search_path, "/lib");
+//
+////    if (opal_lt_dlinit() != 0) {
+//    if (lt_dlinit() != 0) {
+//        opal_output(0, "LT_DLINIT FAILED - CANNOT LOAD LIBORTE");
+//        return -1;
+//    }
+//
+//    /* open the library into the global namespace */
+////    if (opal_lt_dladvise_init(&advise)) {
+//    if (lt_dladvise_init(&advise)) {
+//        opal_output(0, "LT_DLADVISE INIT FAILED - CANNOT LOAD LIBORTE");
+//        return -1;
+//    }
+//
+////    if (opal_lt_dladvise_ext(&advise)) {
+//    if (lt_dladvise_ext(&advise)) {
+//        opal_output(0, "LT_DLADVISE EXT FAILED - CANNOT LOAD LIBORTE");
+////        opal_lt_dladvise_destroy(&advise);
+//        lt_dladvise_destroy(&advise);
+//        return -1;
+//    }
+//
+////    if (opal_lt_dladvise_global(&advise)) {
+//    if (lt_dladvise_global(&advise)) {
+//        opal_output(0, "LT_DLADVISE GLOBAL FAILED - CANNOT LOAD LIBORTE");
+////        opal_lt_dladvise_destroy(&advise);
+//        lt_dladvise_destroy(&advise);
+//        return -1;
+//    }
+//
+////	opal_lt_dlsetsearchpath(search_path);
+//    lt_dlsetsearchpath(search_path);
+////	opal_output(2, "dlsearch path: %s.\n", opal_lt_dlgetsearchpath());
+//    printf("#####################dlsearch path: %s.\n", lt_dlgetsearchpath());
+//    opal_output(0, "#####################dlsearch path: %s.\n", lt_dlgetsearchpath());
+//
+//	/* load pbc lib */
+////	if (!opal_lt_dlopenadvise("libpbc", advise)) {
+////        free(search_path);
+////		opal_output(0, "plm:yarn:ltdl_pbc: opal_lt_dlopenext for libpbc error: %s.\n", opal_lt_dlerror());
+////		return -1;
+////	}
+//
+////	if (!opal_lt_dlopenadvise("libmca_hdclient", advise)) {
+//    if (!lt_dlopenadvise("libmca_hdclient", advise)) {
+////		opal_output(0, "plm:yarn:ltdl_pbc: opal_lt_dlopenext for libmca_hdclient error: %s.\n", opal_lt_dlerror());
+//    	opal_output(0, "plm:yarn:ltdl_pbc: opal_lt_dlopenext for libmca_hdclient error: %s.\n", lt_dlerror());
+//		return -1;
+//	}
+//    opal_output(0, "plm:yarn:ltdl_pbc:  lt_dlopenadvise successful!!");
+//
+////    opal_lt_dladvise_destroy(&advise);
+//    lt_dladvise_destroy(&advise);
+//
+//	return 0;
+//}
+
 static int plm_yarn_open(void)
 {
+	opal_output(0, "!!!!!!!!!!! in plm_yarn_open()");
+//	int ret = ltdl_pbc();
+//	if (0 != ret) {
+//		opal_output(0, "plm:yarn:plm_yarn_open: init hdclient lib failed.\n");
+//		return ORTE_ERROR;
+//	}
     return ORTE_SUCCESS;
 }
 

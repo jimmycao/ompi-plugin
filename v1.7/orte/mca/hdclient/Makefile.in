@@ -25,6 +25,7 @@
 #
 
 
+
 VPATH = @srcdir@
 am__make_dryrun = \
   { \
@@ -61,9 +62,9 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-DIST_COMMON = $(dist_pkgdata_DATA) $(srcdir)/Makefile.am \
-	$(srcdir)/Makefile.in $(srcdir)/base/Makefile.am \
-	$(top_srcdir)/config/depcomp
+DIST_COMMON = $(dist_pkgdata_DATA) $(nobase_orte_HEADERS) \
+	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
+	$(srcdir)/base/Makefile.am $(top_srcdir)/config/depcomp
 subdir = orte/mca/hdclient
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -103,7 +104,8 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgdatadir)"
+am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgdatadir)" \
+	"$(DESTDIR)$(ortedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libmca_hdclient_la_LIBADD =
 am_libmca_hdclient_la_OBJECTS = net_utils.lo str_utils.lo hdclient.lo \
@@ -132,6 +134,7 @@ am__can_run_installinfo = \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
 DATA = $(dist_pkgdata_DATA)
+HEADERS = $(nobase_orte_HEADERS)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -251,6 +254,11 @@ top_srcdir = @top_srcdir@
 AM_CPPFLAGS = -I$(prefix)/include/openmpi
 
 # main library setup
+#mcacomponentdir = $(libdir)/openmpi
+#mcacomponent_LTLIBRARIES = mca_hdclient.la
+#mca_hdclient_la_SOURCES =
+#mca_odls_yarn_la_LDFLAGS = -module -avoid-version 
+#-----------------
 lib_LTLIBRARIES = libmca_hdclient.la
 #noinst_LTLIBRARIES = libmca_hdclient.la
 libmca_hdclient_la_SOURCES = base/net_utils.c base/str_utils.c \
@@ -271,6 +279,8 @@ headers = hdclient.h base/net_utils.h base/str_utils.h base/pbc/pbc.h \
 	base/pbc/src/bootstrap.h base/pbc/src/context.h \
 	base/pbc/src/map.h base/pbc/src/pattern.h base/pbc/src/proto.h \
 	base/pbc/src/stringpool.h base/pbc/src/varint.h
+ortedir = $(includedir)/openmpi/$(subdir)
+nobase_orte_HEADERS = $(headers)
 all: all-am
 
 .SUFFIXES:
@@ -525,6 +535,30 @@ uninstall-dist_pkgdataDATA:
 	@list='$(dist_pkgdata_DATA)'; test -n "$(pkgdatadir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(pkgdatadir)'; $(am__uninstall_files_from_dir)
+install-nobase_orteHEADERS: $(nobase_orte_HEADERS)
+	@$(NORMAL_INSTALL)
+	@list='$(nobase_orte_HEADERS)'; test -n "$(ortedir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(ortedir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(ortedir)" || exit 1; \
+	fi; \
+	$(am__nobase_list) | while read dir files; do \
+	  xfiles=; for file in $$files; do \
+	    if test -f "$$file"; then xfiles="$$xfiles $$file"; \
+	    else xfiles="$$xfiles $(srcdir)/$$file"; fi; done; \
+	  test -z "$$xfiles" || { \
+	    test "x$$dir" = x. || { \
+	      echo " $(MKDIR_P) '$(DESTDIR)$(ortedir)/$$dir'"; \
+	      $(MKDIR_P) "$(DESTDIR)$(ortedir)/$$dir"; }; \
+	    echo " $(INSTALL_HEADER) $$xfiles '$(DESTDIR)$(ortedir)/$$dir'"; \
+	    $(INSTALL_HEADER) $$xfiles "$(DESTDIR)$(ortedir)/$$dir" || exit $$?; }; \
+	done
+
+uninstall-nobase_orteHEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(nobase_orte_HEADERS)'; test -n "$(ortedir)" || list=; \
+	$(am__nobase_strip_setup); files=`$(am__nobase_strip)`; \
+	dir='$(DESTDIR)$(ortedir)'; $(am__uninstall_files_from_dir)
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -624,9 +658,9 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(LTLIBRARIES) $(DATA)
+all-am: Makefile $(LTLIBRARIES) $(DATA) $(HEADERS)
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgdatadir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgdatadir)" "$(DESTDIR)$(ortedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -682,7 +716,8 @@ info: info-am
 
 info-am:
 
-install-data-am: install-data-local install-dist_pkgdataDATA
+install-data-am: install-data-local install-dist_pkgdataDATA \
+	install-nobase_orteHEADERS
 
 install-dvi: install-dvi-am
 
@@ -729,7 +764,7 @@ ps: ps-am
 ps-am:
 
 uninstall-am: uninstall-dist_pkgdataDATA uninstall-libLTLIBRARIES \
-	uninstall-local
+	uninstall-local uninstall-nobase_orteHEADERS
 
 .MAKE: install-am install-strip
 
@@ -741,20 +776,15 @@ uninstall-am: uninstall-dist_pkgdataDATA uninstall-libLTLIBRARIES \
 	install-data-local install-dist_pkgdataDATA install-dvi \
 	install-dvi-am install-exec install-exec-am install-html \
 	install-html-am install-info install-info-am \
-	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags uninstall uninstall-am uninstall-dist_pkgdataDATA \
-	uninstall-libLTLIBRARIES uninstall-local
+	install-libLTLIBRARIES install-man install-nobase_orteHEADERS \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags uninstall uninstall-am \
+	uninstall-dist_pkgdataDATA uninstall-libLTLIBRARIES \
+	uninstall-local uninstall-nobase_orteHEADERS
 
-
-# Conditionally install the header files
-#if WANT_INSTALL_HEADERS
-#ortedir = $(includedir)/openmpi/$(subdir)
-#nobase_orte_HEADERS = $(headers)
-#endif
 
 distclean-local: 
 	rm -f base/static-components.h
@@ -765,6 +795,13 @@ install-data-local:
 
 uninstall-local:
 	rm -rf $(DESTDIR)$(sysconfdir)/protos/hamster_protos.pb
+
+#mcacomponentdir = $(libdir)/openmpi
+#mcacomponent_LTLIBRARIES = mca_plm_yarn.la
+#lib_LTLIBRARIES = mca_plm_yarn.la
+#mca_plm_yarn_la_SOURCES = $(sources) 
+#mca_plm_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal
+#mca_plm_yarn_la_LDFLAGS = -module -avoid-version 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

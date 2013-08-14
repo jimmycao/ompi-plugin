@@ -51,7 +51,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = orte/mca/plm/yarn
+subdir = orte/mca/ess/yarn
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/config/depcomp
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -94,13 +94,13 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(mcacomponentdir)"
 LTLIBRARIES = $(mcacomponent_LTLIBRARIES)
-mca_plm_yarn_la_DEPENDENCIES =
-am__objects_1 = plm_yarn_component.lo plm_yarn_module.lo
-am_mca_plm_yarn_la_OBJECTS = $(am__objects_1)
-mca_plm_yarn_la_OBJECTS = $(am_mca_plm_yarn_la_OBJECTS)
-mca_plm_yarn_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+mca_ess_yarn_la_DEPENDENCIES =
+am__objects_1 = ess_yarn_component.lo ess_yarn_module.lo
+am_mca_ess_yarn_la_OBJECTS = $(am__objects_1)
+mca_ess_yarn_la_OBJECTS = $(am_mca_ess_yarn_la_OBJECTS)
+mca_ess_yarn_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(mca_plm_yarn_la_LDFLAGS) $(LDFLAGS) -o $@
+	$(mca_ess_yarn_la_LDFLAGS) $(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/config/depcomp
 am__depfiles_maybe = depfiles
@@ -114,8 +114,8 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(mca_plm_yarn_la_SOURCES)
-DIST_SOURCES = $(mca_plm_yarn_la_SOURCES)
+SOURCES = $(mca_ess_yarn_la_SOURCES)
+DIST_SOURCES = $(mca_ess_yarn_la_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -240,16 +240,15 @@ top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
 AM_CPPFLAGS = -I$(prefix)/include/openmpi -I$(prefix)/include/openmpi/opal/mca/event/libevent2019/libevent -I$(prefix)/include/openmpi/opal/mca/hwloc/hwloc152/hwloc/include
 sources = \
-        plm_yarn.h \
-        plm_yarn_component.c \
-        plm_yarn_module.c
+        ess_yarn.h \
+        ess_yarn_component.c \
+        ess_yarn_module.c
 
 mcacomponentdir = $(libdir)/openmpi
-mcacomponent_LTLIBRARIES = mca_plm_yarn.la
-#lib_LTLIBRARIES = mca_plm_yarn.la
-mca_plm_yarn_la_SOURCES = $(sources) 
-mca_plm_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -lopen-rte -lopen-pal -L/Users/caoj7/program/orte/lib/openmpi 
-mca_plm_yarn_la_LDFLAGS = -module -avoid-version 
+mcacomponent_LTLIBRARIES = mca_ess_yarn.la
+mca_ess_yarn_la_SOURCES = $(sources)
+mca_ess_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -lopen-rte -lopen-pal -L/Users/caoj7/program/orte/lib/openmpi
+mca_ess_yarn_la_LDFLAGS = -module -avoid-version
 all: all-am
 
 .SUFFIXES:
@@ -263,9 +262,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign orte/mca/plm/yarn/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign orte/mca/ess/yarn/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign orte/mca/plm/yarn/Makefile
+	  $(AUTOMAKE) --foreign orte/mca/ess/yarn/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -318,8 +317,8 @@ clean-mcacomponentLTLIBRARIES:
 	  echo rm -f $${locs}; \
 	  rm -f $${locs}; \
 	}
-mca_plm_yarn.la: $(mca_plm_yarn_la_OBJECTS) $(mca_plm_yarn_la_DEPENDENCIES) $(EXTRA_mca_plm_yarn_la_DEPENDENCIES) 
-	$(mca_plm_yarn_la_LINK) -rpath $(mcacomponentdir) $(mca_plm_yarn_la_OBJECTS) $(mca_plm_yarn_la_LIBADD) $(LIBS)
+mca_ess_yarn.la: $(mca_ess_yarn_la_OBJECTS) $(mca_ess_yarn_la_DEPENDENCIES) $(EXTRA_mca_ess_yarn_la_DEPENDENCIES) 
+	$(mca_ess_yarn_la_LINK) -rpath $(mcacomponentdir) $(mca_ess_yarn_la_OBJECTS) $(mca_ess_yarn_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -327,8 +326,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plm_yarn_component.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plm_yarn_module.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ess_yarn_component.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ess_yarn_module.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -578,11 +577,6 @@ uninstall-am: uninstall-mcacomponentLTLIBRARIES
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
 	uninstall-mcacomponentLTLIBRARIES
 
-
-#lib_LTLIBRARIES = libmca_plm_yarn.la
-#libmca_plm_yarn_la_SOURCES = $(sources) 
-#libmca_plm_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal
-#libmca_plm_yarn_la_LDFLAGS = -module -avoid-version 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
