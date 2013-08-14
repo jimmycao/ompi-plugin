@@ -89,8 +89,11 @@
 #include "orte/mca/ess/base/base.h"
 #include "orte/mca/ess/yarn/ess_yarn.h"
 
-#include "/Users/caoj7/program/common-c/include/libltdl/lt_system.h"
-#include "/Users/caoj7/program/common-c/include/ltdl.h"
+#include "opal/libltdl/ltdl.h"
+//#include "/Users/caoj7/program/common-c/include/libltdl/lt_system.h"
+//#include "/Users/caoj7/program/common-c/include/ltdl.h"
+//#include "ltdl.h"
+//#include "libltdl/lt_system.h"
 
 static int rte_init(void);
 static int rte_finalize(void);
