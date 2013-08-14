@@ -434,7 +434,7 @@ ess_yarn_module.lo ess_yarn_module.o: ess_yarn_module.c \
   /Users/caoj7/program/orte/include/openmpi/orte/mca/ess/ess.h \
   ../../../../orte/mca/ess/yarn/ess_yarn.h \
   /Users/caoj7/program/orte/include/openmpi/opal/libltdl/ltdl.h \
-  libltdl/lt_system.h /usr/include/libltdl/lt_error.h \
+  /usr/include/libltdl/lt_system.h /usr/include/libltdl/lt_error.h \
   /usr/include/libltdl/lt_dlloader.h
 
 /Users/caoj7/program/orte/include/openmpi/orte_config.h:
@@ -1367,7 +1367,7 @@ ess_yarn_module.lo ess_yarn_module.o: ess_yarn_module.c \
 
 /Users/caoj7/program/orte/include/openmpi/opal/libltdl/ltdl.h:
 
-libltdl/lt_system.h:
+/usr/include/libltdl/lt_system.h:
 
 /usr/include/libltdl/lt_error.h:
 
