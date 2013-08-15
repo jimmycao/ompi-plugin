@@ -1,0 +1,2 @@
+SUBDIRS = common v1.7
+ACLOCAL_AMFLAGS = -I m4

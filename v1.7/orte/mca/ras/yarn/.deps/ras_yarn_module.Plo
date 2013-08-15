@@ -237,9 +237,9 @@ ras_yarn_module.lo ras_yarn_module.o: ras_yarn_module.c \
   /Users/caoj7/program/orte/include/openmpi/opal/class/opal_bitmap.h \
   ras_yarn.h /Users/caoj7/program/orte/include/openmpi/orte/mca/ras/ras.h \
   /Users/caoj7/program/orte/include/openmpi/orte/mca/ras/base/base.h \
-  ../../../../orte/mca/hdclient/hdclient.h \
+  ../../../../../common/hdclient.h \
   /Users/caoj7/program/orte/include/openmpi/opal/util/output.h \
-  ../../../../orte/mca/hdclient/base/pbc/pbc.h
+  ../../../../../common/base/pbc/pbc.h
 
 /Users/caoj7/program/orte/include/openmpi/orte_config.h:
 
@@ -783,8 +783,8 @@ ras_yarn.h:
 
 /Users/caoj7/program/orte/include/openmpi/orte/mca/ras/base/base.h:
 
-../../../../orte/mca/hdclient/hdclient.h:
+../../../../../common/hdclient.h:
 
 /Users/caoj7/program/orte/include/openmpi/opal/util/output.h:
 
-../../../../orte/mca/hdclient/base/pbc/pbc.h:
+../../../../../common/base/pbc/pbc.h:

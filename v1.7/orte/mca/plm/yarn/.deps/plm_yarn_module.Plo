@@ -257,9 +257,9 @@ plm_yarn_module.lo plm_yarn_module.o: plm_yarn_module.c \
   /Users/caoj7/program/orte/include/openmpi/orte/runtime/orte_globals.h \
   /Users/caoj7/program/orte/include/openmpi/orte/runtime/orte_globals.h \
   plm_yarn.h /Users/caoj7/program/orte/include/openmpi/opal/mca/mca.h \
-  ../../../../orte/mca/hdclient/hdclient.h \
+  ../../../../../common/hdclient.h \
   /Users/caoj7/program/orte/include/openmpi/opal/util/output.h \
-  ../../../../orte/mca/hdclient/base/pbc/pbc.h \
+  ../../../../../common/base/pbc/pbc.h \
   /Users/caoj7/program/orte/include/openmpi/orte/mca/rml/rml.h \
   /Users/caoj7/program/orte/include/openmpi/opal/mca/mca.h \
   /Users/caoj7/program/orte/include/openmpi/opal/mca/crs/crs.h \
@@ -877,11 +877,11 @@ plm_yarn.h:
 
 /Users/caoj7/program/orte/include/openmpi/opal/mca/mca.h:
 
-../../../../orte/mca/hdclient/hdclient.h:
+../../../../../common/hdclient.h:
 
 /Users/caoj7/program/orte/include/openmpi/opal/util/output.h:
 
-../../../../orte/mca/hdclient/base/pbc/pbc.h:
+../../../../../common/base/pbc/pbc.h:
 
 /Users/caoj7/program/orte/include/openmpi/orte/mca/rml/rml.h:
 

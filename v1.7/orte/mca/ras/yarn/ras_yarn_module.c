@@ -54,7 +54,8 @@
 
 #include "ras_yarn.h"
 
-#include "orte/mca/hdclient/hdclient.h"
+//#include "orte/mca/hdclient/hdclient.h"
+#include "common/hdclient.h"
 
 /*
  * API functions

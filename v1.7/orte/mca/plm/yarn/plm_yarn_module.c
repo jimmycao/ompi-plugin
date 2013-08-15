@@ -76,7 +76,8 @@
 #include "orte/mca/plm/base/plm_private.h"
 #include "plm_yarn.h"
 
-#include "orte/mca/hdclient/hdclient.h"
+//#include "orte/mca/hdclient/hdclient.h"
+#include "common/hdclient.h"
 #include "orte/mca/rml/rml.h"
 #include "orte/mca/grpcomm/grpcomm.h"
 #include "orte/mca/ess/base/base.h"

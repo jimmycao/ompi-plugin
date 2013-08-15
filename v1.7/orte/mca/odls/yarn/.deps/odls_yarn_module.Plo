@@ -252,9 +252,7 @@ odls_yarn_module.lo odls_yarn_module.o: odls_yarn_module.c \
   /Users/caoj7/program/orte/include/openmpi/orte/mca/rml/rml_types.h \
   /Users/caoj7/program/orte/include/openmpi/orte/runtime/orte_globals.h \
   /Users/caoj7/program/orte/include/openmpi/orte/mca/odls/odls_types.h \
-  ../../../../orte/mca/odls/yarn/odls_yarn.h \
-  /Users/caoj7/program/orte/include/openmpi/orte_config.h \
-  /Users/caoj7/program/orte/include/openmpi/opal/mca/mca.h \
+  odls_yarn.h /Users/caoj7/program/orte/include/openmpi/opal/mca/mca.h \
   /Users/caoj7/program/orte/include/openmpi/orte/mca/odls/odls.h \
   /Users/caoj7/program/orte/include/openmpi/orte/mca/state/state.h \
   /Users/caoj7/program/orte/include/openmpi/orte_config.h \
@@ -851,9 +849,7 @@ odls_yarn_module.lo odls_yarn_module.o: odls_yarn_module.c \
 
 /Users/caoj7/program/orte/include/openmpi/orte/mca/odls/odls_types.h:
 
-../../../../orte/mca/odls/yarn/odls_yarn.h:
-
-/Users/caoj7/program/orte/include/openmpi/orte_config.h:
+odls_yarn.h:
 
 /Users/caoj7/program/orte/include/openmpi/opal/mca/mca.h:
 

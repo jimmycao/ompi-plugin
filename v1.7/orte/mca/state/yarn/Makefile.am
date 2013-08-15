@@ -8,12 +8,7 @@ sources = \
 
 mcacomponentdir = $(libdir)/openmpi
 mcacomponent_LTLIBRARIES = mca_state_yarn.la
-#lib_LTLIBRARIES = mca_state_yarn.la
 mca_state_yarn_la_SOURCES = $(sources) 
-mca_state_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal
-mca_state_yarn_la_LDFLAGS = -module -avoid-version 
-
-#lib_LTLIBRARIES = libmca_state_yarn.la
-#libmca_state_yarn_la_SOURCES = $(sources) 
-#libmca_state_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal
-#libmca_state_yarn_la_LDFLAGS = -module -avoid-version 
+mca_state_yarn_la_LIBADD = $(prefix)/lib/libopen-rte.la
+#mca_state_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal
+mca_state_yarn_la_LDFLAGS = -module -avoid-version

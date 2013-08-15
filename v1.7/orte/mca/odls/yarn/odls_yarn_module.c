@@ -128,7 +128,7 @@
 
 #include "orte/mca/odls/base/base.h"
 #include "orte/mca/odls/base/odls_private.h"
-#include "orte/mca/odls/yarn/odls_yarn.h"
+#include "odls_yarn.h"
 
 
 #include "orte/mca/state/state.h"
