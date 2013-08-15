@@ -88,14 +88,9 @@
 #include "orte/mca/ess/ess.h"
 #include "orte/mca/ess/base/base.h"
 #include "orte/mca/ess/yarn/ess_yarn.h"
-/* LT_DLSYM_CONST needed for ltdl.h */
+/* LT_DLSYM_CONST is needed for ltdl.h */
 # define LT_DLSYM_CONST const
 #include "opal/libltdl/ltdl.h"
-//#include "/Users/caoj7/program/common-c/include/libltdl/lt_system.h"
-//#include "/Users/caoj7/program/common-c/include/ltdl.h"
-//#include "ltdl.h"
-//#include "libltdl/lt_system.h"
-//#include <dlfcn.h>
 
 static int rte_init(void);
 static int rte_finalize(void);
@@ -134,27 +129,6 @@ static void setup_sighandler(int signal, opal_event_t *ev,
     opal_event_signal_add(ev, NULL);
 }
 
-//static int ltdl_pbc()
-//{
-//	int rc;
-////	char filename[1024];
-////	strcat(filename, "/Users/caoj7/program/orte");
-////	strcat(filename, "/lib");
-//
-//	void *handle;
-//	char *error;
-//
-//	handle = dlopen("/Users/caoj7/program/orte/lib/libmca_hdclient.dylib", RTLD_LAZY);
-//	if (!handle) {
-//		fprintf(stderr, "%s\n", dlerror());
-//		exit(-1);
-//	}
-//
-//	dlerror(); /* Clear any existing error */
-//	dlclose(handle);
-//	return 0;
-//}
-
 static int ltdl_pbc()
 {
 	int rc;
@@ -162,16 +136,13 @@ static int ltdl_pbc()
 	filename[0] = '\0';
     lt_dladvise advise;
 
-//    opal_output(0, "###########OMPI_HOME=%s", getenv("OMPI_HOME"));
-    setenv("OMPI_HOME", "/Users/caoj7/program/orte", 1);
-
-    if (!getenv("OMPI_HOME")) {
+    if (!getenv("HAMSTER_CORE_HOME")) {
         opal_output(0, "ess:yarn:init: OMPI_HOME not set in env, please check.\n");
         return -1;
     }
 
     char* search_path = malloc(1024);
-    strcpy(search_path, getenv("OMPI_HOME"));
+    strcpy(search_path, getenv("HAMSTER_CORE_HOME"));
     strcat(search_path, "/lib");
 
     if (lt_dlinit() != 0) {
