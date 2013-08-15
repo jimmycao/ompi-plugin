@@ -94,7 +94,8 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(mcacomponentdir)"
 LTLIBRARIES = $(mcacomponent_LTLIBRARIES)
-mca_ras_yarn_la_DEPENDENCIES =
+mca_ras_yarn_la_DEPENDENCIES = $(prefix)/lib/libopen-rte.la \
+	$(top_builddir)/common/libhamster_common.la
 am__objects_1 = ras_yarn_component.lo ras_yarn_module.lo
 am_mca_ras_yarn_la_OBJECTS = $(am__objects_1)
 mca_ras_yarn_la_OBJECTS = $(am_mca_ras_yarn_la_OBJECTS)
@@ -252,9 +253,8 @@ sources = \
 
 mcacomponentdir = $(libdir)/openmpi
 mcacomponent_LTLIBRARIES = mca_ras_yarn.la
-#lib_LTLIBRARIES = mca_ras_yarn.la
 mca_ras_yarn_la_SOURCES = $(sources) 
-mca_ras_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal
+mca_ras_yarn_la_LIBADD = $(prefix)/lib/libopen-rte.la $(top_builddir)/common/libhamster_common.la
 mca_ras_yarn_la_LDFLAGS = -module -avoid-version 
 all: all-am
 
@@ -584,11 +584,6 @@ uninstall-am: uninstall-mcacomponentLTLIBRARIES
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
 	uninstall-mcacomponentLTLIBRARIES
 
-
-#lib_LTLIBRARIES = libmca_ras_yarn.la
-#libmca_ras_yarn_la_SOURCES = $(sources) 
-#libmca_ras_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal
-#libmca_ras_yarn_la_LDFLAGS = -module -avoid-version 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

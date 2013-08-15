@@ -230,9 +230,6 @@ target_alias =
 top_build_prefix = ../../../
 top_builddir = ../../..
 top_srcdir = ../../..
-
-#SUBDIRS = odls
-#SUBDIRS =  hdclient ess odls plm ras state
 SUBDIRS = odls plm ras state
 all: all-recursive
 
@@ -601,7 +598,6 @@ uninstall-am:
 	mostlyclean mostlyclean-generic mostlyclean-libtool pdf pdf-am \
 	ps ps-am tags tags-recursive uninstall uninstall-am
 
-#SUBDIRS = odls plm ras state
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

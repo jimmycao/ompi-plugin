@@ -261,7 +261,6 @@ AM_CPPFLAGS = -I$(prefix)/include/openmpi
 
 # main library setup
 #-----------------
-#lib_LTLIBRARIES = libmca_hdclient.la
 #noinst_LTLIBRARIES = libhamster_common.la
 lib_LTLIBRARIES = libhamster_common.la
 libhamster_common_la_SOURCES = base/net_utils.c base/str_utils.c \

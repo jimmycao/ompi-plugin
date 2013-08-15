@@ -94,7 +94,7 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(mcacomponentdir)"
 LTLIBRARIES = $(mcacomponent_LTLIBRARIES)
-mca_odls_yarn_la_DEPENDENCIES =
+mca_odls_yarn_la_DEPENDENCIES = $(prefix)/lib/libopen-rte.la
 am__objects_1 = odls_yarn_component.lo odls_yarn_module.lo
 am_mca_odls_yarn_la_OBJECTS = $(am__objects_1)
 mca_odls_yarn_la_OBJECTS = $(am_mca_odls_yarn_la_OBJECTS)
@@ -252,9 +252,8 @@ sources = \
 
 mcacomponentdir = $(libdir)/openmpi
 mcacomponent_LTLIBRARIES = mca_odls_yarn.la
-#lib_LTLIBRARIES = mca_odls_yarn.la
 mca_odls_yarn_la_SOURCES = $(sources) 
-mca_odls_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal 
+mca_odls_yarn_la_LIBADD = $(prefix)/lib/libopen-rte.la
 mca_odls_yarn_la_LDFLAGS = -module -avoid-version 
 all: all-am
 
@@ -584,11 +583,6 @@ uninstall-am: uninstall-mcacomponentLTLIBRARIES
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
 	uninstall-mcacomponentLTLIBRARIES
 
-
-#lib_LTLIBRARIES = libmca_odls_yarn.la
-#libmca_odls_yarn_la_SOURCES = $(sources) 
-#libmca_odls_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal
-#libmca_odls_yarn_la_LDFLAGS = -module -avoid-version 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

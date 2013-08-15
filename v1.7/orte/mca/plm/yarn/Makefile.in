@@ -94,7 +94,8 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(mcacomponentdir)"
 LTLIBRARIES = $(mcacomponent_LTLIBRARIES)
-mca_plm_yarn_la_DEPENDENCIES = $(prefix)/lib/libopen-rte.la
+mca_plm_yarn_la_DEPENDENCIES = $(prefix)/lib/libopen-rte.la \
+	$(top_builddir)/common/libhamster_common.la
 am__objects_1 = plm_yarn_component.lo plm_yarn_module.lo
 am_mca_plm_yarn_la_OBJECTS = $(am__objects_1)
 mca_plm_yarn_la_OBJECTS = $(am_mca_plm_yarn_la_OBJECTS)
@@ -253,8 +254,7 @@ sources = \
 mcacomponentdir = $(libdir)/openmpi
 mcacomponent_LTLIBRARIES = mca_plm_yarn.la
 mca_plm_yarn_la_SOURCES = $(sources) 
-mca_plm_yarn_la_LIBADD = $(prefix)/lib/libopen-rte.la
-#mca_plm_yarn_la_LIBADD = $(prefix)/lib/libopen-rte.la  $(top_builddir)/common/libhamster_common.la
+mca_plm_yarn_la_LIBADD = $(prefix)/lib/libopen-rte.la $(top_builddir)/common/libhamster_common.la
 mca_plm_yarn_la_LDFLAGS = -module -avoid-version
 all: all-am
 
@@ -584,46 +584,6 @@ uninstall-am: uninstall-mcacomponentLTLIBRARIES
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
 	uninstall-mcacomponentLTLIBRARIES
 
-
-#mca_plm_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -lopen-rte -lopen-pal -L/Users/caoj7/program/orte/lib/openmpi
-#mca_plm_yarn_la_LDADD = $(top_builddir)/common/libhamster_common.la
-#mca_plm_yarn_la_LDADD = -L../../../../common/libhamster_common.la
-#mca_plm_yarn_la_LDFLAGS = -module -avoid-version -L../../../../common
-#mca_odls_yarn_la_LIBS = -lhamster_common
-
-#lib_LTLIBRARIES = libmca_plm_yarn.la
-#libmca_plm_yarn_la_SOURCES = $(sources) 
-#libmca_plm_yarn_la_LIBADD = -L/Users/caoj7/program/orte/lib -L/Users/caoj7/program/orte/lib/openmpi -lopen-rte -lopen-pal
-#libmca_plm_yarn_la_LDFLAGS = -module -avoid-version 
-
-# Build the main ORTE library
-
-#lib_LTLIBRARIES = libopen-rte.la
-#libopen_rte_la_SOURCES =
-#libopen_rte_la_LIBADD = \
-#	$(MCA_orte_FRAMEWORK_LIBS) \
-#	$(top_ompi_builddir)/opal/libopen-pal.la
-#libopen_rte_la_DEPENDENCIES = $(libopen_rte_la_LIBADD)
-#libopen_rte_la_LDFLAGS = -version-info $(libopen_rte_so_version)
-
-#if MCA_BUILD_orte_plm_lsf_DSO
-#component_noinst = 
-#component_install = mca_plm_lsf.la
-#else
-#component_noinst = libmca_plm_lsf.la
-#component_install =
-#endif
-
-#mcacomponentdir = $(pkglibdir)
-#mcacomponent_LTLIBRARIES = $(component_install)
-#mca_plm_lsf_la_SOURCES = $(sources)
-#mca_plm_lsf_la_LDFLAGS = -module -avoid-version $(plm_lsf_LDFLAGS)
-#mca_plm_lsf_la_LIBADD = $(plm_lsf_LIBS)
-
-#noinst_LTLIBRARIES = $(component_noinst)
-#libmca_plm_lsf_la_SOURCES = $(sources)
-#libmca_plm_lsf_la_LDFLAGS = -module -avoid-version $(plm_lsf_LDFLAGS)
-#libmca_plm_lsf_la_LIBADD = $(plm_lsf_LIBS)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
