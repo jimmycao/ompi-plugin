@@ -1,4 +1,4 @@
-*.libs/
+*.deps/
 *.o
 *.so
 *.lo
