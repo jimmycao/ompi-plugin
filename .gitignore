@@ -1,3 +1,6 @@
+.project
+.cproject
+*.libs/
 *.deps/
 *.o
 *.so
@@ -15,4 +18,8 @@ aclocal.m4
 autom4te.cache/
 config/
 configure
-m4/
+m4/libtool.m4
+m4/lt~obsolete.m4
+m4/ltoptions.m4
+m4/ltsugar.m4
+m4/ltversion.m4

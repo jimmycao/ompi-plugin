@@ -1563,7 +1563,7 @@ if test "x$config" = "x" -o ! -f "$config" ; then
     $ECHO "misconfiguration."
 else
     $ECHO "The $PROJECT build system is now prepared.  To build here, run:"
-    $ECHO "  $config --prefix=/where/open-mpi/installed"
+    $ECHO "  $config --prefix=/where/open-mpi/installed --ompi-version=[OpenMPI Version, e.g., 1.7.2]"
     $ECHO "  make"
 fi
 
