@@ -2,8 +2,8 @@ AM_CPPFLAGS = -I$(prefix)/include/openmpi
 
 # main library setup
 #-----------------
-#noinst_LTLIBRARIES = libhamster_common.la
-lib_LTLIBRARIES = libhamster_common.la
+noinst_LTLIBRARIES = libhamster_common.la
+#lib_LTLIBRARIES = libhamster_common.la
 libhamster_common_la_SOURCES =
 
 # pkgdata setup
