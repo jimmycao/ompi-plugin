@@ -70,19 +70,15 @@ AC_ARG_WITH([ompi172],
   			[:],
   			[with_ompi172=no])
 #AC_DEFUN([OMPI_VERSION],[
-#	AC_ARG_WITH([ompi172],
-#  			[AS_HELP_STRING([--with-ompi172@<:@=ARG@:>@], [with OpenMPI-1.7.2 support @<:@ARG=no@:>@])],
-#  			[:],
-#  			[with_ompi172=no])
 #])  
-AM_CONDITIONAL([OMPI_VERSION_172], [test x$with_ompi172 = xyes])
+AM_CONDITIONAL([OMPI_172], [test x$with_ompi172 = xyes])
 
 
 AC_ARG_WITH([ompi164],
   			[AS_HELP_STRING([--with-ompi164@<:@=ARG@:>@], [with OpenMPI-1.6.4 support @<:@ARG=no@:>@])],
   			[:],
   			[with_ompi164=no])
-AM_CONDITIONAL([OMPI_VERSION_164], [test x$with_ompi164 = xyes])
+AM_CONDITIONAL([OMPI_164], [test x$with_ompi164 = xyes])
 
 AC_CONFIG_FILES([Makefile
                  common/Makefile

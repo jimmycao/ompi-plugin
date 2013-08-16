@@ -1,81 +1,4 @@
 #!/bin/sh
-#                        a u t o g e n . s h
-#
-# Copyright (c) 2005-2009 United States Government as represented by
-# the U.S. Army Research Laboratory.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
-# are met:
-#
-# 1. Redistributions of source code must retain the above copyright
-# notice, this list of conditions and the following disclaimer.
-#
-# 2. Redistributions in binary form must reproduce the above
-# copyright notice, this list of conditions and the following
-# disclaimer in the documentation and/or other materials provided
-# with the distribution.
-#
-# 3. The name of the author may not be used to endorse or promote
-# products derived from this software without specific prior written
-# permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
-# OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
-# DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
-# GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-###
-#
-# Script for automatically preparing the sources for compilation by
-# performing the myriad of necessary steps.  The script attempts to
-# detect proper version support, and outputs warnings about particular
-# systems that have autotool peculiarities.
-#
-# Basically, if everything is set up and installed correctly, the
-# script will validate that minimum versions of the GNU Build System
-# tools are installed, account for several common configuration
-# issues, and then simply run autoreconf for you.
-#
-# If autoreconf fails, which can happen for many valid configurations,
-# this script proceeds to run manual preparation steps effectively
-# providing a POSIX shell script (mostly complete) reimplementation of
-# autoreconf.
-#
-# The AUTORECONF, AUTOCONF, AUTOMAKE, LIBTOOLIZE, ACLOCAL, AUTOHEADER
-# environment variables and corresponding _OPTIONS variables (e.g.
-# AUTORECONF_OPTIONS) may be used to override the default automatic
-# detection behaviors.  Similarly the _VERSION variables will override
-# the minimum required version numbers.
-#
-# Examples:
-#
-#   To obtain help on usage:
-#     ./autogen.sh --help
-#
-#   To obtain verbose output:
-#     ./autogen.sh --verbose
-#
-#   To skip autoreconf and prepare manually:
-#     AUTORECONF=false ./autogen.sh
-#
-#   To verbosely try running with an older (unsupported) autoconf:
-#     AUTOCONF_VERSION=2.50 ./autogen.sh --verbose
-#
-# Author:
-#   Christopher Sean Morrison <morrison@brlcad.org>
-#
-# Patches:
-#   Sebastian Pipping <sebastian@pipping.org>
-#
-######################################################################
 
 # set to minimum acceptable version of autoconf
 if [ "x$AUTOCONF_VERSION" = "x" ] ; then
@@ -1562,12 +1485,19 @@ if test "x$config" = "x" -o ! -f "$config" ; then
     $ECHO "with the --verbose option to get more details on a potential"
     $ECHO "misconfiguration."
 else
-    $ECHO "The $PROJECT build system is now prepared.  To build here, run:"
-#    $ECHO "  $config --prefix=/where/open-mpi/installed --ompi-version=[OpenMPI Version, e.g., 1.7.2]"
-	$ECHO "  $config --prefix=/where/open-mpi/installed --with-ompi172/--with-ompi164"
-    $ECHO "  make"
+	ompi_version=$(mpirun --version 2>&1|head -1|cut -d' ' -f4)
+	$ECHO "OpenMPI $ompi_version is installed on your system."
+	if [ "x$ompi_version" != "x1.7.2" -a "x$ompi_version" != "x1.6.4" ]; then
+		$ECHO "Sorry, currently Hamster supports only OpenMPI-1.6.4 and OpenMPI-1.7.2"
+	else 
+    	$ECHO "The $PROJECT build system is now prepared.  To build here, run:"
+    	short_ompi_version=$(echo $ompi_version|sed 's/\.//g')
+		$ECHO "  $config --prefix=/where/open-mpi/installed --with-ompi${short_ompi_version}"
+    	$ECHO "  make"
+    fi
 fi
 
+#  	$ECHO "  $config --prefix=/where/open-mpi/installed --ompi-version=[OpenMPI Version, e.g., 1.7.2]"
 
 # Local Variables:
 # mode: sh
